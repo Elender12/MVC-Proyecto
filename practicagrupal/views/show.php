@@ -4,4 +4,8 @@
     <?php echo $name?>
 </li>
 
+<form method="POST" action="../Login">
+        <input type="submit" value="salir"/>
+</form>
+
 
