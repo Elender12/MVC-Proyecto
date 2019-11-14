@@ -8,14 +8,16 @@
     <title>Document</title>
 </head>
 <body>
-<form method="post" action="../Currantes/fichar">
+<form method="post" action="../Currantes/ficharEntrada">
 Hora de entrada:
     <input type="text" placeholder="Hora de entrada" name="entrada">
     <input type="submit" value="Registrar">
+</form>
 Hora de salida:
+<form method="post" action="../Currantes/ficharSalida">
     <input type="text" placeholder="Hora de salida" name="salida">
     <input type="submit" value="Registrar">
-    </form>
+</form>
     <br>
     <form method="post" action="../Currantes/consultarHoras">
     <button type="submit" name="consultarH">consultar horas</button>
