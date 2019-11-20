@@ -14,6 +14,7 @@ class LoginController {
         echo "El trabajador introducido es: ";
         echo $_POST["worker"];
         require "../practica/views/fichar.php";
+        //va a la vista fichar y desde allí al metodo fichar entrada o salida de Usuario
 
     }
 
