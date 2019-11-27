@@ -1,8 +1,8 @@
 # Creacion de la bd
-CREATE DATABASE mvcGrupal2;
+CREATE DATABASE mvcGrupal;
 
 # Utilizamos la nueva base de datos
-USE mvcGrupal2;
+USE mvcGrupal;
 
 # Creacion de la tabla loginUsuarioimputaciones
 CREATE TABLE LoginUsuarios (
