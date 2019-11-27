@@ -1,10 +1,10 @@
-#Creamos la nueva base de datos
-CREATE DATABASE empresa_servidor
+# Creacion de la bd
+CREATE DATABASE mvcGrupal2;
 
-# Nos colocamos sobre la base de datos nueva
-USE empresa_servidor
+# Utilizamos la nueva base de datos
+USE mvcGrupal2;
 
-# Creamos la tabla usuarios registrados consta de un Id, Usuario y COntraseña
+# Creacion de la tabla loginUsuarioimputaciones
 CREATE TABLE LoginUsuarios (
     Id int NOT NULL AUTO_INCREMENT,
     Nombre varchar(30) NOT NULL,
@@ -12,37 +12,55 @@ CREATE TABLE LoginUsuarios (
     PRIMARY KEY (Id)
 );
 
-# Insertamos los valores iniciales
-INSERT INTO LoginUsuarios ()
+-- Insertamos los valores iniciales
+INSERT INTO LoginUsuarios (Nombre, Clave)
 VALUES
-(null, 'Elena', '1234'),
-(null, 'Sergio', '1234'),
-(null,'Eduardo', '1234');
+('Elena', '1234'),
+('Sergio', '1234'),
+('Eduardo', '1234');
 
-# Creamos la tabla imputaciones que hará referencia al usuario ha iniciado sesion, la fecha del dia actual y las horas de entrada/salida
+# Creacion de la tabla imputaciones
 CREATE TABLE Imputaciones (
 	Id int NOT NULL AUTO_INCREMENT,
     UsuarioId int,
     Dia DATE,
     HoraEntrada TIME,
     HoraSalida TIME,
+    HorasTrabajadas TIME,
     PRIMARY KEY (id),
     FOREIGN KEY (UsuarioId) references LoginUsuarios(Id)	
 );
 
-# Insertamnos datos de prueba
-INSERT INTO Imputaciones(UsuarioId, Dia, HoraEntrada, HoraSalida)
-VALUES 
-(1, '2019-11-13', '08:00:00', '15:00:00'),
-(2, '2019-11-13', '08:00:00', '15:00:00'),
-(3, '2019-11-13', '08:00:00', '15:00:00'),
-(1, '2019-11-13', '16:00:00', '18:00:00');
+# Creacion del procedimiento almacenado
+# Recibe como parametros de entrada el id del usuario, la hora de entrada y la orda de salida
+# la hora de salida es opcional, si no la recibe coge la hora de entrada y le suma 8 horas 
+# para calcular las horas trabajadas.
+DELIMITER $$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `SP_RegistrarJornada`(
+	IN UsuarioId INT,
+    IN HoraEntrada TIME,
+    IN HoraSalida TIME)
+BEGIN
+	DECLARE DiaActual DATE DEFAULT CURDATE();
+    DECLARE HorasSuma TIME DEFAULT '08:00:00';
+    DECLARE DiferenciaHoras TIME DEFAULT '00:00:00';
+    
+	IF convert(HoraSalida, TIME) <> '00:00:00' THEN
+		SET HoraSalida = HoraSalida;
+    ELSE
+		SET HoraSalida = HoraEntrada;
+		SET HoraSalida = ADDTIME(HoraEntrada, HorasSuma);
+    END IF;    
+    
+    SET DiferenciaHoras = TIMEDIFF(HoraSalida, HoraEntrada);
 
+    IF DiferenciaHoras > 0 THEN
+		INSERT INTO Imputaciones (UsuarioId, Dia, HoraEntrada, HoraSalida, HorasTrabajadas)
+		VALUES  (UsuarioId, DiaActual, HoraEntrada, HoraSalida, DiferenciaHoras);
+    END IF;
+END$$
+DELIMITER ;
 
-# Seleccionamos las horas del usuario 1
-SELECT lg.Nombre, im.Dia, im.HoraEntrada, im.HoraSalida FROM imputaciones im, loginusuarios lg WHERE im.UsuarioId = 1 AND lg.Id = 1;
-
-# Calculamos las horas del usuario 1 totales
-SELECT TIMEDIFF(HoraSalida, HoraEntrada) FROM imputaciones where Dia like '2019-11-13' AND UsuarioId = 2;
-
-
+# Ejemplo de lamada al procedimiento almacenado
+# CALL SP_RegistrarJornada(1, '12:00:00', '15:30:00');
+# CALL SP_RegistrarJornada(3, '03:13:27', null);
