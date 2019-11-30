@@ -1,3 +1,6 @@
+<?php
+    ob_start();
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -14,3 +17,6 @@
 </form>
 </body>
 </html>
+<?php
+    ob_end_flush();
+?>

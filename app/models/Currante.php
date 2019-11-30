@@ -1,31 +1,57 @@
 <?php
+namespace App\Models;
 
+use PDO;
+use DateTime;
+use Core\Model;
 
-class Currante {
+require_once '../core/Model.php';
+
+class Currante extends Model{
+
     public function __construct(){ }
 
+    // Realizamos una consulta a la BD para comprobar que las credenciales son correctas
+    // En caso de que lo sean generar una cookie con el id usuario y otra con el nombre
     public function comprobar($worker,$pass){
-        $bool=FALSE;
-        $c=0;
-        $stmt = $this->conex->prepare("SELECT * FROM LoginUsuarios WHERE Id=? AND Nombre LIKE ?");
-        $stmt->bind_param("ss", $p1,$w1 );
-        $p1=$pass;
-        $w1=$worker;
-        $stmt->execute();
-        $stmt->bind_result($dia, $hentrada, $hsalida);
+        
+        try {
+          
+            $db = Currante::db();
+            $query = "SELECT Id, Nombre FROM LoginUsuarios Where Nombre like'".$worker."' and Clave like'".$pass."'";
 
-        while($stmt->fetch()){
-            $c++;
+            $statement = $db->query($query);
+
+            $datos = $statement->fetchAll(PDO::FETCH_CLASS, Currante::class);
+            
+            // Si no devuelve datos la consulta paramos el flujo mostrando un error
+            if($datos == null)
+            {
+                echo "<p>Credenciales incorrectas.</p>";
+                return;
+            }
+
+
+            $identificadorCurrante = $datos[0]->Id;
+            $nombreCurrante = $datos[0]->Nombre;
+
+            // Ojo cuidao! Esta parte no la esta haciendo bien
+            ob_get_clean();
+            setcookie("IdentificadorCurrante", $idCurrante);
+            setcookie("NombreCurrante", $nombreCurrante);
+
+            echo "<p>Login correcto!.</p>";
+            
+        } catch (Exception $e) {
+            echo "<p>Ha ocurrido un error al realizar el login.</p>";
         }
-        if($c==1){
-            $bool=TRUE;
-        }
-        mysqli_close($this->conex);
-
-        return $bool;
-
 
     }
+
+    // Funcion privada para que no se pueda invocar desde fuera. Se encarga de crear las cookies.
+    private function GenerarCookies($idCurrante, $nombreCurrante){
+    }
+
     public function fichar($ent,$sal){
 
         $stmt = $this->conex->prepare("INSERT INTO Imputaciones (UsuarioId, HoraEntrada, HoraSalida) VALUES (?,?,?)");

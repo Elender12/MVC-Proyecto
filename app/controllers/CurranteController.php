@@ -1,8 +1,9 @@
 <?php
-
+namespace App\Controllers;
 //primero le digo que va a necesitar este archivo y lo utiliza en el método ficharEntrada()
 session_start();
 require "../app/models/Currante.php";
+use App\Models\Currante;
 
 class CurranteController {
     public function __construct(){
@@ -12,7 +13,7 @@ class CurranteController {
         //mostrará la introducción del nombre del trabajador
         // echo $_POST["worker"];
         //este lo manda a un -php de views login.php
-        require "../practica/views/login.php";
+        require "../app/views/login.php";
         echo "estoy en la función index";
 
     }
@@ -30,11 +31,11 @@ class CurranteController {
         $sal = $_POST["salida"];
 
         if($ent>$sal){
-            require "../practica/views/fichar.php";
+            require "../app/views/fichar.php";
         }else{
                 $fich = new Currante;
                 $fich->fichar($ent,$sal); 
-                require "../practica/models/Currante.php";
+                require "../app/models/Currante.php";
             }
         
 

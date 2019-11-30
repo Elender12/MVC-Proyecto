@@ -1,13 +1,14 @@
 <?php
-// session_start();
+namespace App\Controllers;
+
 require "../app/models/Currante.php";
+use App\Models\Currante;
 
 class LoginController {
 
     public function index(){
         //este lo manda a un -php de views login.php
         require "../app/views/login.php";
-
     }
 
     public function hacerLogin(){
@@ -15,10 +16,10 @@ class LoginController {
         $worker=$_POST["worker"];
         $pass = $_POST["pass"];
 
-        echo "Bienvenido: ".$worker;
+        $con = new Currante();
+        $bol = $con->comprobar($worker,$pass);
+        echo $bol;
 
-        
-        
     }
 
     public function mostrar(){
