@@ -1,1 +1,0 @@
-Creacion basica de los scripts que se utilizaran en la base de datos
