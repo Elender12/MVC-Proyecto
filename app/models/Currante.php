@@ -1,6 +1,7 @@
 <?php
 namespace App\Models;
 
+ob_start();
 use PDO;
 use DateTime;
 use Core\Model;
@@ -31,14 +32,8 @@ class Currante extends Model{
                 return;
             }
 
-
             $identificadorCurrante = $datos[0]->Id;
             $nombreCurrante = $datos[0]->Nombre;
-
-            // Ojo cuidao! Esta parte no la esta haciendo bien
-            ob_get_clean();
-            setcookie("IdentificadorCurrante", $idCurrante);
-            setcookie("NombreCurrante", $nombreCurrante);
 
             echo "<p>Login correcto!.</p>";
             
@@ -48,24 +43,58 @@ class Currante extends Model{
 
     }
 
+    public function darDeAlta($usuario, $clave){
+        $db = Currante::db();
+        $query = "INSERT INTO LoginUsuarios (Nombre, Clave) VALUES ('".$usuario."','".$clave."')";
+
+        $statement = $db->query($query);
+        //$datos = $statement->execute($query);
+
+
+        echo $usuario;
+            
+    }
+
     // Funcion privada para que no se pueda invocar desde fuera. Se encarga de crear las cookies.
-    private function GenerarCookies($idCurrante, $nombreCurrante){
+    public function extraerUsuarios(){
+        $db = Currante::db();
+        $query = "SELECT * FROM LoginUsuarios";
+        $statement = $db->query($query);        
+        $usuarios = $statement->fetchAll(PDO::FETCH_CLASS, Currante::class);
+
+        echo "<table>";
+        echo "<tr><th>Id</th><th>Nombre</th><th>Clave</th><th></th></tr>";
+
+        foreach($usuarios as $key => $value)
+        {
+            echo "<tr>";
+            echo "<td>".$value->Id."</td>";
+            echo "<td>".$value->Nombre."</td>";
+            echo "<td>".$value->Clave."</td>";
+            echo "<td><a href=\"<?php eliminarRegistro?id=".$value->Id."?>\"'>&#10006;</a></td>";
+            echo "</tr>";
+        }
+
+        echo "</table>";
+    }
+
+    public function eliminarRegistro(){
+        echo "hola";
+        $db = Currante::db();
+        $query = "DELETE FROM 'LoginUsuarios' WHERE 'LoginUsuarios.Id' = ".$_GET['id'];
+        $statement = $db->query($query);         
     }
 
     public function fichar($ent,$sal){
 
         $stmt = $this->conex->prepare("INSERT INTO Imputaciones (UsuarioId, HoraEntrada, HoraSalida) VALUES (?,?,?)");
-        $stmt->bind_param("sss", $id,$he,$hs );
+        $stmt->bind_param("sss", $id,$he,$hs);
         $id=$_SESSION["uid"];
         $he=$ent;
         $hs=$sal;
         $stmt->execute();
-
         
         // mysqli_close($this->conex);
-
-        
-
 
     }
 
@@ -109,6 +138,7 @@ class Currante extends Model{
 
 
 
+ob_end_flush();
 
 
 

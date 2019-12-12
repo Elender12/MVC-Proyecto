@@ -1,4 +1,6 @@
 <?php
+
+ob_start();
 class App
 {
     function __construct()
@@ -38,4 +40,7 @@ class App
             die();
         }
     }
+
 }
+ob_end_flush();
+?>
