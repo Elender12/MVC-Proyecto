@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <title>Formulario</title>
+    <meta charset="utf-8">
+</head>
+<body>
+
+<h2>Añadir un trabajador:</h2>
+
+<form action="login.php">
+  Nombre:<br>
+  <input type="text" name="nombre">
+  <br>
+  Clave:<br>
+  <input type="text" name="clave">
+  <br><br>
+  <input type="submit" value="Añadir trabajador">
+</form> 
+</body>
+</html>
+  
