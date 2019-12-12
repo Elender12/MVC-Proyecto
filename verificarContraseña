@@ -1,0 +1,21 @@
+function verificarPassword() {
+    var letraMin = /[a-z]+/;
+    var letraMayus = /[A-Z]+/;
+    var numeros = /[0-9]+/;
+    var patronCaracEspeciales = /[\@\#\$\%\&\_\-]/;
+    //recogo los datos que ha introducido el usuario
+    var contrasenia = document.getElementById("pass").value;
+    console.log(contrasenia);
+    //verifico que tenga la longitud requerida
+    if (contrasenia.length < 8 || contrasenia.length > 16) {
+        alert("Tu contraseña es o demasiado corta/larga.");
+    } else {
+        //verifico que cumpla con los patrones
+        if (letraMin.test(contrasenia) && letraMayus.test(contrasenia)
+            && numeros.test(contrasenia) && patronCaracEspeciales.test(contrasenia)) {
+            alert("La contraseña es SEGURA.");
+        } else {
+            alert("La contraseña NO es segura.");
+        }
+    }
+}
