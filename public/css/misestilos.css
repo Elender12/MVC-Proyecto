@@ -1,0 +1,35 @@
+/* Estilos generales */
+.centrar-elemento{
+	color:red;
+}
+
+a{
+	text-decoration: none;
+}
+
+/* Estilos lista usuarios */
+#tabla-usuarios {
+	border-collapse: collapse;
+}
+
+#tabla-usuarios td, #tabla-usuarios .contenido-lista {
+	border: 1px solid #ddd;
+	padding: 8px;
+}
+
+tr:nth-child(even) {
+	background-color: #dddddd;
+}
+
+#cabecera-tabla th{
+	padding-top: 12px;
+	padding-bottom: 12px;
+	text-align: left;
+	background-color: #4CAF50;
+	color: white;
+}
+
+.enlace-borrar{
+	color: red;
+	font-size: 20px;
+}

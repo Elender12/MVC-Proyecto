@@ -13,7 +13,7 @@ class CurranteController {
         //mostrará la introducción del nombre del trabajador
         // echo $_POST["worker"];
         //este lo manda a un -php de views login.php
-        require "../app/views/login.php";
+        require "../app/views/administracion.php";
         echo "estoy en la función index";
 
     }
@@ -33,20 +33,16 @@ class CurranteController {
         if($ent>$sal){
             require "../app/views/fichar.php";
         }else{
-                $fich = new Currante;
-                $fich->fichar($ent,$sal); 
-                require "../app/models/Currante.php";
-            }
-        
-
-
-
+            $fich = new Currante;
+            $fich->fichar($ent,$sal); 
+            require "../app/models/Currante.php";
+        }
         //echo "Estoy en la función ficharEntrada() y aquí debería recibir todos los datos";
     }
 
     public function consultarHoras(){
         //mostrará todas las horas trabajadas
-       //require "../practica/views/fichar.php";
+        //require "../practica/views/fichar.php";
         echo "Usuario " . $_SESSION["worker"] . " con uid " . $_SESSION["uid"] . " Trabajo: ";
         echo "<br/>";
 

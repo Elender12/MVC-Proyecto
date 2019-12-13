@@ -13,7 +13,6 @@ use PDO;
 class Model
 {
 
-    function __construct(){ }
 
     protected static function db()
     {
@@ -25,4 +24,6 @@ class Model
         }
         return $db;
     }
+
+    
 }

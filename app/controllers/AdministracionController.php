@@ -1,18 +1,17 @@
 <?php
-
 namespace App\Controllers;
+ob_start();
 
 require "../app/models/Currante.php";
 use App\Models\Currante;
 
-class LoginController {
+class AdministracionController {
 
     public function index(){
-        //este lo manda a un -php de views login.php
-        require "../app/views/login.php";
+        require "../app/views/administracion.php";
     }
 
-    public function hacerLogin(){    
+    public function hacerLogin(){
         $worker=$_POST["worker"];
         $pass = $_POST["pass"];
 
@@ -24,17 +23,22 @@ class LoginController {
     public function registro(){
         $nombre=$_GET["nombre"];
         $clave = $_GET["clave"];
-
-        echo "hola";
-        echo $nombre;
-
         $conexion = new Currante();
         $resultado = $conexion->darDeAlta($nombre,$clave);
     }
 
     public function mostrarRegistros(){
-        $conexion = new Currante();
-        $resultado = $conexion->extraerUsuarios();   
+        $usuarios = Currante::extraerUsuarios();
+        require "../app/views/listadousuarios.php";
     }
-    
+  
+    public function delete($arguments)
+    {
+        $id = (int) $arguments[0];
+        $usuario = Currante::find($id);
+        $usuario->eliminarRegistro();
+    }
 }
+
+ob_end_flush();
+?>

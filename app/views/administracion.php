@@ -8,6 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Login</title>
+	<link rel="stylesheet" type="text/css" href="css/misestilos.css">
     <script type="text/javascript">
     	
 	function verificarPassword() {
@@ -39,14 +40,14 @@
 <body>
 
 <h3>Inicio de sesion</h3>
-<form action="../Login/hacerLogin" method="POST">
+<form action="../Administracion/hacerLogin" method="POST">
     <label>Nombre:</label><input name ="worker" type="text"/>
     <label>Contraseña:</label><input name="pass" type="text"/>
     <input type="submit"/>
 </form>
 
 <h3>Creacion de usuario</h3>
-<form action="../Login/registro">
+<form action="../Administracion/registro">
   <label>Nombre:</label><input type="text" name="nombre">
   <label>Clave:</label><input type="text" id="pass" name="clave">
   <button onclick="verificarPassword();return false;">Comprobar fortaleza clave</button>
@@ -54,7 +55,7 @@
 </form> 
 
 <h3>Mostrar usuarios</h3>
-<form action="../Login/mostrarRegistros">
+<form action="../Administracion/mostrarRegistros">
   <input type="submit" value="Mostrar">
 </form>
 
