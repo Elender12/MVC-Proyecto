@@ -1,31 +1,73 @@
 /* Estilos generales */
-.centrar-elemento{
-	color:red;
+
+*{
+	margin: 0;
+	padding: 0;
+}
+
+.texto-rojo{
+	color:#DB464D;
 }
 
 a{
 	text-decoration: none;
 }
 
+p, label, button, input{
+	font-size: 20px;
+}
+
+/* Pagina principal */
+.div-container{
+	margin: auto;
+	margin-top: 10%;
+	text-align: center;
+	width: 30%;
+	padding: 6px;
+}
+
+.btn-continuar{
+	background-color: #DB464D;
+	border-radius: 12px;
+	color: #FFFFFF;
+	padding: 6px;
+}
+
+
+/* Formulario inicio de sesion */
+.input-formulario{
+	border: none;
+	border-bottom: 1px solid #33D0EA;
+}
+
+
+
 /* Estilos lista usuarios */
 #tabla-usuarios {
 	border-collapse: collapse;
 }
 
+#tabla-usuarios tr, th, td {	
+	padding: 30px;
+}
+
+#tabla-usuarios th{
+	font-size: 22px;
+}
+
 #tabla-usuarios td, #tabla-usuarios .contenido-lista {
-	border: 1px solid #ddd;
 	padding: 8px;
 }
 
 tr:nth-child(even) {
-	background-color: #dddddd;
+	background-color: #C0E9F0;
 }
 
 #cabecera-tabla th{
 	padding-top: 12px;
 	padding-bottom: 12px;
 	text-align: left;
-	background-color: #4CAF50;
+	background-color: #5ACADC;
 	color: white;
 }
 

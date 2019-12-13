@@ -10,13 +10,15 @@
 </head>
 
 <body>
-
-<h3>Prueba php</h3>
+<div class="div-container">
+<h3>Listado de empleados</h3>
 <table id="tabla-usuarios">
 <tr id="cabecera-tabla">
 <th>Id</th>
 <th>Usuario</th>
 <th>Contraseña</th>
+<th></th>
+<th></th>
 </tr>
 
 <?php foreach ($usuarios as $usuario): ?>
@@ -24,10 +26,12 @@
 	<td class="contenido-lista"><?php echo $usuario->Id ?></td>
 	<td class="contenido-lista"><?php echo $usuario->Nombre ?></td>
 	<td class="contenido-lista"><?php echo $usuario->Clave ?></td>
-	<td class="acciones-lista"><a href="/Administracion/delete/<?php echo $usuario->Id ?>" class="enlace-borrar">&#10006;</a></td>
+	<td class="acciones-lista"><a href="/Administracion/delete/<?php echo $usuario->Id ?>">&#9997;</a></td>
+	<td class="acciones-lista"><a href="/Administracion/delete/<?php echo $usuario->Id ?>">&#10060;</a></td>
 </tr>
 <?php endforeach ?>
 </table>
+</div>
 </body>
 </html>
 <?php ob_end_flush(); ?>

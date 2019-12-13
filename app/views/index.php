@@ -9,12 +9,14 @@
 
 <body>
 
-<h1 class="centrar-elemento">Aviso de seguridad:</h1>
-<form method="post" action="../administracion">
-    <p>OJO! Estás accediendo al menú de administración</p>
-    <p>¿Quieres continuar?</p>
-    <input type="submit" value="Continuar">
-</form>
+<div class="div-container">
+	<h1 class="texto-rojo">Aviso de seguridad:</h1>
+	<form method="post" action="../administracion">
+	    <p>OJO! Estás accediendo al menú de administración</p>
+	    <p>¿Quieres continuar?</p>
+	    <input class="btn-continuar" type="submit" value="Continuar">
+	</form>
+</div>
 
 </body>
 

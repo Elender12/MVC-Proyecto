@@ -39,26 +39,27 @@
 </head>
 <body>
 
+<div class="div-container">
 <h3>Inicio de sesion</h3>
 <form action="../Administracion/hacerLogin" method="POST">
-    <label>Nombre:</label><input name ="worker" type="text"/>
-    <label>Contraseña:</label><input name="pass" type="text"/>
+    <label>Nombre:</label><input class="input-formulario" name ="worker" type="text"/><br>
+    <label>Contraseña:</label><input class="input-formulario" name="pass" type="text"/><br><br>
     <input type="submit"/>
 </form>
-
+<br><br>
 <h3>Creacion de usuario</h3>
 <form action="../Administracion/registro">
-  <label>Nombre:</label><input type="text" name="nombre">
-  <label>Clave:</label><input type="text" id="pass" name="clave">
+  <label>Nombre:</label><input class="input-formulario" type="text" name="nombre"><br>
+  <label>Clave:</label><input class="input-formulario" type="text" id="pass" name="clave"><br><br>
   <button onclick="verificarPassword();return false;">Comprobar fortaleza clave</button>
   <input type="submit" value="Añadir trabajador">
 </form> 
-
+<br><br>
 <h3>Mostrar usuarios</h3>
 <form action="../Administracion/mostrarRegistros">
   <input type="submit" value="Mostrar">
 </form>
-
+</div>
 
 </body>
 </html>
