@@ -18,7 +18,7 @@
 <th>Usuario</th>
 <th>Contraseña</th>
 <th></th>
-<th></th>
+<th>Contraseña</th>
 </tr>
 
 <?php foreach ($usuarios as $usuario): ?>
@@ -26,8 +26,8 @@
 	<td class="contenido-lista"><?php echo $usuario->Id ?></td>
 	<td class="contenido-lista"><?php echo $usuario->Nombre ?></td>
 	<td class="contenido-lista"><?php echo $usuario->Clave ?></td>
-	<td class="acciones-lista"><a href="/Administracion/delete/<?php echo $usuario->Id ?>">&#9997;</a></td>
-	<td class="acciones-lista"><a href="/Administracion/delete/<?php echo $usuario->Id ?>">&#10060;</a></td>
+	<td class="acciones-lista"><a href="/Administracion/editar/<?php echo $usuario->Id ?>">&#9997;</a></td>
+	<td class="acciones-lista"><a href="/Administracion/borrar/<?php echo $usuario->Id ?>">&#10060;</a></td>
 </tr>
 <?php endforeach ?>
 </table>

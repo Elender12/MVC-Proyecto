@@ -75,6 +75,16 @@ class Currante extends Model{
         $stmt = $db->prepare("INSERT INTO LoginUsuarios (Nombre, Clave) VALUES ('".$nombre."', '".$clave."')");   
         $stmt->execute($sql); 
     }
+
+    public function actualizar()
+    {
+        $db = Currante::db();
+        $stmt = $db->prepare('UPDATE LoginUsuarios SET Nombre = :Nombre, Clave = :Clave WHERE Id = :Id');
+        $stmt->bindValue(':Id', $this->Id);
+        $stmt->bindValue(':Nombre', $this->Nombre);
+        $stmt->bindValue(':Clave', $this->Clave);
+        return $stmt->execute();
+    }
 }
 
 ob_end_flush();

@@ -32,11 +32,27 @@ class AdministracionController {
         require "../app/views/listadousuarios.php";
     }
   
-    public function delete($arguments)
+    public function borrar($arguments)
     {
         $id = (int) $arguments[0];
         $usuario = Currante::find($id);
         $usuario->eliminarRegistro();
+    }
+
+    public function editar($arguments)
+    {
+        $id = (int) $arguments[0];
+        $usuario = Currante::find($id);
+        require '../app/views/editar.php';
+    }
+
+    public function update()
+    {
+        $id = $_REQUEST['Id'];
+        $usuario = Currante::find($id);
+        $usuario->Nombre = $_REQUEST['Nombre'];
+        $usuario->Clave = $_REQUEST['Clave'];
+        $usuario->actualizar();
     }
 }
 
